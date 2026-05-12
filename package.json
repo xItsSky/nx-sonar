@@ -1,0 +1,63 @@
+{
+  "name": "@nx-sonar/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "test": "nx run-many -t test",
+    "lint": "nx run-many -t lint",
+    "typecheck": "nx run-many -t typecheck",
+    "build": "nx run-many -t build",
+    "e2e": "nx run nx-sonar-e2e:e2e",
+    "format": "nx format:write",
+    "format:check": "nx format:check"
+  },
+  "private": true,
+  "dependencies": {
+    "@nx/devkit": "22.7.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "@nx/eslint": "22.7.1",
+    "@nx/eslint-plugin": "22.7.1",
+    "@nx/jest": "22.7.1",
+    "@nx/js": "22.7.1",
+    "@nx/plugin": "22.7.1",
+    "@nx/workspace": "22.7.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.8",
+    "@semantic-release/npm": "^13.1.5",
+    "@semantic-release/release-notes-generator": "^14.1.1",
+    "@swc-node/register": "~1.11.1",
+    "@swc/cli": "~0.8.0",
+    "@swc/core": "~1.15.5",
+    "@swc/helpers": "~0.5.18",
+    "@types/jest": "^30.0.0",
+    "@types/node": "20.19.9",
+    "conventional-changelog-conventionalcommits": "^9.3.1",
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^10.0.0",
+    "jest": "^30.0.2",
+    "jest-environment-jsdom": "^30.0.2",
+    "jest-environment-node": "^30.0.2",
+    "jest-util": "^30.0.2",
+    "jsonc-eslint-parser": "^2.1.0",
+    "nx": "22.7.1",
+    "prettier": "~3.6.2",
+    "semantic-release": "^25.0.3",
+    "sonarqube-scanner": "^4.3.6",
+    "ts-jest": "^29.4.0",
+    "ts-node": "10.9.1",
+    "tslib": "^2.3.0",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "^8.40.0",
+    "verdaccio": "^6.3.2"
+  },
+  "nx": {
+    "includedScripts": []
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "NxSonarInitGenerator",
+  "title": "@itssky/nx-sonar:init",
+  "description": "Configure @itssky/nx-sonar in the workspace.",
+  "type": "object",
+  "properties": {
+    "hostUrl": { "type": "string", "format": "uri" },
+    "organization": { "type": "string" },
+    "skipPrompts": { "type": "boolean", "default": false }
+  },
+  "required": [],
+  "additionalProperties": false
+}

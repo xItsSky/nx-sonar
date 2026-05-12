@@ -1,0 +1,69 @@
+{
+  "name": "nx-sonar",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "nx-sonar/src",
+  "projectType": "library",
+  "release": {
+    "version": {
+      "manifestRootsToUpdate": ["dist/{projectRoot}"],
+      "currentVersionResolver": "git-tag",
+      "fallbackCurrentVersionResolver": "disk"
+    }
+  },
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/nx-sonar",
+        "main": "nx-sonar/src/index.ts",
+        "tsConfig": "nx-sonar/tsconfig.lib.json",
+        "assets": [
+          "nx-sonar/*.md",
+          {
+            "input": "./nx-sonar/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./nx-sonar/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./nx-sonar",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./nx-sonar",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "nx-sonar/jest.config.cts"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p nx-sonar/tsconfig.lib.json"
+      }
+    }
+  }
+}

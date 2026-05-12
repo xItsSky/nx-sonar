@@ -1,0 +1,14 @@
+{
+  "generators": {
+    "init": {
+      "factory": "./src/generators/init/generator",
+      "schema": "./src/generators/init/schema.json",
+      "description": "Configure @itssky/nx-sonar in the workspace."
+    },
+    "configuration": {
+      "factory": "./src/generators/configuration/generator",
+      "schema": "./src/generators/configuration/schema.json",
+      "description": "Add a sonar target to a project."
+    }
+  }
+}

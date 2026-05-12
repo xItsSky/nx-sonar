@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "scan": {
+      "implementation": "./src/executors/scan/executor",
+      "schema": "./src/executors/scan/schema.json",
+      "description": "Run a SonarQube/SonarCloud scan on the project."
+    }
+  }
+}

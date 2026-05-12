@@ -1,0 +1,60 @@
+name: Bug report
+description: Something doesn't work as documented.
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report.
+  - type: input
+    id: version
+    attributes:
+      label: "@itssky/nx-sonar version"
+      placeholder: "e.g. 0.2.1"
+    validations:
+      required: true
+  - type: input
+    id: nx-version
+    attributes:
+      label: "nx version"
+      placeholder: "e.g. 19.6.0"
+    validations:
+      required: true
+  - type: input
+    id: node-version
+    attributes:
+      label: "Node version"
+      placeholder: "e.g. 20.11.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: server
+    attributes:
+      label: "Sonar server"
+      options: ["SonarCloud", "SonarQube (self-hosted)", "Both / N/A"]
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: "Reproduction"
+      description: "Minimal steps. A link to a public repo is ideal."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected behavior"
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: "Actual behavior"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Relevant logs"
+      render: shell

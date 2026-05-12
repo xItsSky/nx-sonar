@@ -1,0 +1,33 @@
+{
+  "name": "@itssky/nx-sonar",
+  "version": "0.0.0-development",
+  "description": "Turnkey nx plugin that runs SonarQube/SonarCloud scans on nx projects.",
+  "keywords": ["nx", "nx-plugin", "sonar", "sonarqube", "sonarcloud", "code-quality"],
+  "homepage": "https://github.com/xItsSky/nx-sonar#readme",
+  "bugs": "https://github.com/xItsSky/nx-sonar/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xItsSky/nx-sonar.git",
+    "directory": "nx-sonar"
+  },
+  "license": "MIT",
+  "author": "Quentin (xItsSky)",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "peerDependencies": {
+    "@nx/devkit": ">=22.0.0"
+  },
+  "dependencies": {
+    "sonarqube-scanner": "^4.3.6",
+    "tslib": "^2.3.0"
+  },
+  "executors": "./executors.json",
+  "generators": "./generators.json"
+}

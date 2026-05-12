@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "NxSonarConfigurationGenerator",
+  "title": "@itssky/nx-sonar:configuration",
+  "description": "Add a sonar target to a project.",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Project to configure.",
+      "$default": { "$source": "projectName" },
+      "x-prompt": "Which project should be configured for Sonar?"
+    },
+    "projectKey": {
+      "type": "string",
+      "description": "Sonar project key.",
+      "x-prompt": "Sonar projectKey (leave blank to set later in project.json):"
+    },
+    "force": {
+      "type": "boolean",
+      "default": false,
+      "description": "Overwrite an existing sonar target."
+    }
+  },
+  "required": ["project"],
+  "additionalProperties": false
+}

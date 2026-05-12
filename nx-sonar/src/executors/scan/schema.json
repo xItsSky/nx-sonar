@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "NxSonarScanExecutor",
+  "title": "@itssky/nx-sonar:scan",
+  "description": "Run a SonarQube/SonarCloud scan against the project.",
+  "type": "object",
+  "properties": {
+    "projectKey": { "type": "string", "description": "Sonar project key." },
+    "projectName": { "type": "string", "description": "Display name in Sonar." },
+    "projectVersion": { "type": "string" },
+    "hostUrl": { "type": "string", "format": "uri" },
+    "organization": { "type": "string", "description": "SonarCloud organization." },
+    "sources": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "tests": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "exclusions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "coverageLcovPath": { "type": "string" },
+    "testExecutionReportPath": { "type": "string" },
+    "qualityGateWait": { "type": "boolean", "default": true },
+    "branchDetection": { "type": "boolean", "default": true },
+    "extraProperties": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "verbose": { "type": "boolean", "default": false }
+  },
+  "required": [],
+  "additionalProperties": false
+}
