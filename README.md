@@ -13,7 +13,7 @@
 
   <br />
 
-  [**Plugin docs**](nx-sonar/README.md) &nbsp;&bull;&nbsp; [**Architecture**](docs/architecture.md) &nbsp;&bull;&nbsp; [**ADRs**](docs/adr) &nbsp;&bull;&nbsp; [**Contributing**](CONTRIBUTING.md) &nbsp;&bull;&nbsp; [**Changelog**](CHANGELOG.md)
+  [**Plugin docs**](nx-sonar/README.md) &nbsp;&bull;&nbsp; [**Architecture**](docs/architecture.md) &nbsp;&bull;&nbsp; [**Contributing**](CONTRIBUTING.md) &nbsp;&bull;&nbsp; [**Changelog**](CHANGELOG.md)
 
   <br />
 
@@ -80,6 +80,16 @@ Support matrix:
 Bug reports, fixes, recipes, and new features are all welcome — head over to [CONTRIBUTING.md](CONTRIBUTING.md) for setup and conventions, and to [our discussions](https://github.com/xItsSky/nx-sonar/discussions) if you'd rather ask first.
 
 This project follows the [Contributor Code of Conduct](CODE_OF_CONDUCT.md). For security disclosures, see [SECURITY.md](SECURITY.md).
+
+## Contributors
+
+Every commit, issue, review, and recipe shaping this plugin shows up here. Thanks to all of them.
+
+<a href="https://github.com/xItsSky/nx-sonar/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=xItsSky/nx-sonar" alt="Contributors to xItsSky/nx-sonar" />
+</a>
+
+*Avatars auto-rendered by [contrib.rocks](https://contrib.rocks) — no extra tooling, the grid updates as soon as a PR merges.*
 
 ## License
 
