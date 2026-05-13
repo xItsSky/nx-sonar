@@ -3,21 +3,24 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 
+const ciEnv: NodeJS.ProcessEnv = { ...process.env, CI: '1', NX_DAEMON: 'false' };
+
 describe('nx-sonar e2e: jest project', () => {
   const workspaceName = `nx-sonar-e2e-jest-${Date.now()}`;
   const workspaceRoot = join(tmpdir(), workspaceName);
 
   beforeAll(() => {
-    mkdirSync(workspaceRoot, { recursive: true });
+    rmSync(workspaceRoot, { recursive: true, force: true });
     execSync(
-      `npx --yes create-nx-workspace@latest ${workspaceName} --preset=apps --packageManager=npm --nxCloud=skip --interactive=false`,
-      { cwd: tmpdir(), stdio: 'inherit' },
+      `npx --yes create-nx-workspace@latest ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
+      { cwd: tmpdir(), stdio: 'inherit', env: ciEnv },
     );
     // Install the locally built plugin tarball (the scaffold's globalSetup
     // publishes it to a local verdaccio registry under the @e2e dist-tag).
     execSync(`npm install --save-dev @itssky/nx-sonar@e2e`, {
       cwd: workspaceRoot,
       stdio: 'inherit',
+      env: ciEnv,
     });
   });
 
@@ -26,18 +29,19 @@ describe('nx-sonar e2e: jest project', () => {
   it('init + configuration + scan dry-run produces the expected property bag', () => {
     execSync(
       `npx nx g @itssky/nx-sonar:init --hostUrl=https://sonarcloud.io --organization=my-org --skipPrompts`,
-      { cwd: workspaceRoot, stdio: 'inherit' },
+      { cwd: workspaceRoot, stdio: 'inherit', env: ciEnv },
     );
 
     // Create a small lib that has a jest test target.
     execSync(`npx nx g @nx/js:library packages/sample --bundler=tsc`, {
       cwd: workspaceRoot,
       stdio: 'inherit',
+      env: ciEnv,
     });
 
     execSync(
       `npx nx g @itssky/nx-sonar:configuration --project=sample --projectKey=org_sample`,
-      { cwd: workspaceRoot, stdio: 'inherit' },
+      { cwd: workspaceRoot, stdio: 'inherit', env: ciEnv },
     );
 
     // Produce a coverage file the executor will look for.
@@ -50,7 +54,7 @@ describe('nx-sonar e2e: jest project', () => {
       cwd: workspaceRoot,
       stdio: 'inherit',
       env: {
-        ...process.env,
+        ...ciEnv,
         SONAR_TOKEN: 'e2e-token',
         NX_SONAR_DRY_RUN: '1',
         NX_SONAR_DRY_RUN_OUT: out,
