@@ -1,3 +1,20 @@
+## [22.0.0](https://github.com/xItsSky/nx-sonar/compare/v21.0.0...v22.0.0) (2026-07-03)
+
+### ⚠ BREAKING CHANGES
+
+* **nx-sonar:** @nx/devkit peer dependency is now ^22.0.0; nx 23+
+workspaces must wait for the matching 23.x release.
+
+Co-authored-by: Claude Code <noreply@anthropic.com>
+
+### Features
+
+* **nx-sonar:** align plugin major version with supported nx major ([#6](https://github.com/xItsSky/nx-sonar/issues/6)) ([472f62f](https://github.com/xItsSky/nx-sonar/commit/472f62f15c34ab57fd3fc92a68ec13e58bc77d9c))
+
+### Bug Fixes
+
+* **nx-sonar:** send token as sonar.login for SonarQube <= 9.x servers ([#5](https://github.com/xItsSky/nx-sonar/issues/5)) ([4b3b1c7](https://github.com/xItsSky/nx-sonar/commit/4b3b1c7ca29cf6b84a52001044f8260f0e9c1f0b))
+
 ## 1.0.0 (2026-05-13)
 
 ### Features
