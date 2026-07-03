@@ -24,6 +24,9 @@ export function buildScannerProperties({
   props['sonar.host.url'] = options.hostUrl;
   if (options.organization) props['sonar.organization'] = options.organization;
   props['sonar.token'] = options.token;
+  // SonarQube <= 9.x scanner engines ignore sonar.token and only read
+  // sonar.login; recent scanners prefer sonar.token and just warn on this.
+  props['sonar.login'] = options.token;
 
   props['sonar.sources'] = joinList(paths.sources);
   if (paths.tests) props['sonar.tests'] = joinList(paths.tests);
