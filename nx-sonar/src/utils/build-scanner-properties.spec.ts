@@ -41,6 +41,16 @@ describe('buildScannerProperties', () => {
     expect(props['sonar.token']).toBe('t');
   });
 
+  it('sends the token as sonar.login too, for SonarQube <= 9.x engines', () => {
+    const props = buildScannerProperties({
+      options: baseOptions({ token: 'squ_abc123' }),
+      paths: basePaths(),
+      ciContext: null,
+    });
+    expect(props['sonar.token']).toBe('squ_abc123');
+    expect(props['sonar.login']).toBe('squ_abc123');
+  });
+
   it('includes organization for SonarCloud', () => {
     const props = buildScannerProperties({
       options: baseOptions({ organization: 'my-org' }),

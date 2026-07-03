@@ -76,7 +76,7 @@ flowchart TD
 | 2 | `resolveOptions` | ✅ | `ResolvedOptions` — merged config with the token attached. Throws if `SONAR_TOKEN` is missing or a `token` field is found in `nx.json`/`project.json`. |
 | 3 | `detectCiContext` | ✅ (env passed in) | `CiContext` describing branch or PR, or `null` if not in CI. |
 | 4 | `resolveProjectPaths` | ✅ | `ResolvedPaths` — sources, coverage path (existence-checked), optional junit report (warn + omit if missing). |
-| 5 | `buildScannerProperties` | ✅ | Flat `Record<string,string>` ready to hand to the scanner. `extraProperties` is spread last so users can override anything. |
+| 5 | `buildScannerProperties` | ✅ | Flat `Record<string,string>` ready to hand to the scanner. The token is emitted as both `sonar.token` (SonarQube 10+/SonarCloud) and `sonar.login` (SonarQube <= 9.x engines ignore `sonar.token`). `extraProperties` is spread last so users can override anything. |
 | 6 | `runScanner` | ❌ — only I/O module | Invokes `sonarqube-scanner` and returns `{ success }`. Honours `NX_SONAR_DRY_RUN=1` for e2e (writes the property bag to `NX_SONAR_DRY_RUN_OUT` instead of calling the binary). |
 
 ## Configuration layering
