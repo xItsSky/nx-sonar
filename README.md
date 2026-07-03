@@ -64,14 +64,14 @@ docs/              # architecture, ADRs, design specs
 
 ## Versioning &amp; support
 
-Released automatically via [semantic-release](https://semantic-release.gitbook.io/) from conventional-commit messages. Releases follow [semver](https://semver.org).
+Released automatically via [semantic-release](https://semantic-release.gitbook.io/) from conventional-commit messages. Releases follow [semver](https://semver.org), and the plugin's **major version tracks the Nx major it supports**: `@itssky/nx-sonar` 22.x targets Nx 22, and 23.0.0 will ship when Nx 23 is supported.
 
 Support matrix:
 
 | Tool   | Versions                 |
 | ------ | ------------------------ |
 | Node   | 20.x, 22.x               |
-| Nx     | latest 2 majors (≥ 22.x) |
+| Nx     | 22.x (plugin 22.x)       |
 | Jest   | 28+                      |
 | Vitest | 1+                       |
 

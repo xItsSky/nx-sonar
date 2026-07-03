@@ -22,7 +22,7 @@
     "node": ">=20.0.0"
   },
   "peerDependencies": {
-    "@nx/devkit": ">=22.0.0"
+    "@nx/devkit": "^22.0.0"
   },
   "dependencies": {
     "sonarqube-scanner": "^4.3.6",

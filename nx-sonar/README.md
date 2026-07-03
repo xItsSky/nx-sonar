@@ -22,6 +22,13 @@ emits LCOV (jest, vitest, …).
 npm install --save-dev @itssky/nx-sonar
 ```
 
+## Versioning
+
+The plugin's **major** version tracks the **Nx major** it supports:
+`@itssky/nx-sonar` 22.x targets Nx 22 (`@nx/devkit ^22`). When Nx 23 is
+supported, the plugin releases 23.0.0. Minor and patch versions follow
+semantic-release within that major.
+
 ## Quickstart
 
 ```bash
@@ -143,7 +150,7 @@ wording comes from SonarQube <= 9.x, whose scanner engine ignores
 `sonar.token`. The plugin sends the token as both `sonar.token`
 (SonarQube 10+, SonarCloud) and `sonar.login` (legacy servers), so make sure
 `SONAR_TOKEN` holds a token generated on *that* server and that your plugin
-version is >= 1.0.1. Recent scanners may log a deprecation warning about
+version is >= 22.0.0. Recent scanners may log a deprecation warning about
 `sonar.login`; it is expected and harmless.
 
 **Quality Gate failed but I don't want to block the build** — set
