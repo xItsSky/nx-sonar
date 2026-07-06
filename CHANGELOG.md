@@ -1,3 +1,9 @@
+## [22.0.2](https://github.com/xItsSky/nx-sonar/compare/v22.0.1...v22.0.2) (2026-07-06)
+
+### Bug Fixes
+
+* **nx-sonar-e2e:** make sample lib generation self-contained ([#9](https://github.com/xItsSky/nx-sonar/issues/9)) ([2607635](https://github.com/xItsSky/nx-sonar/commit/2607635d40f3ebf3e98240f8cea906273c843164))
+
 ## [22.0.1](https://github.com/xItsSky/nx-sonar/compare/v22.0.0...v22.0.1) (2026-07-06)
 
 ### Bug Fixes
