@@ -33,7 +33,7 @@ describe('nx-sonar e2e: jest project', () => {
     );
 
     // Create a small lib that has a jest test target.
-    execSync(`npx nx g @nx/js:library packages/sample --name=sample --bundler=tsc`, {
+    execSync(`npx nx g @nx/js:library packages/sample --name=sample --bundler=tsc --linter=none --unitTestRunner=none`, {
       cwd: workspaceRoot,
       stdio: 'inherit',
       env: ciEnv,
