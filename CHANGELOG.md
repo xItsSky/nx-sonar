@@ -1,3 +1,9 @@
+## [22.0.1](https://github.com/xItsSky/nx-sonar/compare/v22.0.0...v22.0.1) (2026-07-06)
+
+### Bug Fixes
+
+* **nx-sonar:** stop executor schema defaults from shadowing nx.json config ([#8](https://github.com/xItsSky/nx-sonar/issues/8)) ([e4d4c00](https://github.com/xItsSky/nx-sonar/commit/e4d4c008a662ebff1a9bdd36c7db8a372466a117))
+
 ## [22.0.0](https://github.com/xItsSky/nx-sonar/compare/v21.0.0...v22.0.0) (2026-07-03)
 
 ### ⚠ BREAKING CHANGES
