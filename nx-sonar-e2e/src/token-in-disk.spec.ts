@@ -25,7 +25,7 @@ describe('nx-sonar e2e: token in nx.json', () => {
       stdio: 'inherit',
       env: ciEnv,
     });
-    execSync(`npx nx g @nx/js:library packages/sample --name=sample --bundler=tsc`, {
+    execSync(`npx nx g @nx/js:library packages/sample --name=sample --bundler=tsc --linter=none --unitTestRunner=none`, {
       cwd: workspaceRoot,
       stdio: 'inherit',
       env: ciEnv,
