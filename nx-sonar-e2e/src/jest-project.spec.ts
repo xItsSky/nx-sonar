@@ -12,7 +12,7 @@ describe('nx-sonar e2e: jest project', () => {
   beforeAll(() => {
     rmSync(workspaceRoot, { recursive: true, force: true });
     execSync(
-      `npx --yes create-nx-workspace@latest ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
+      `npx --yes create-nx-workspace@22 ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
       { cwd: tmpdir(), stdio: 'inherit', env: ciEnv },
     );
     // Install the locally built plugin tarball (the scaffold's globalSetup
@@ -33,7 +33,7 @@ describe('nx-sonar e2e: jest project', () => {
     );
 
     // Create a small lib that has a jest test target.
-    execSync(`npx nx g @nx/js:library packages/sample --bundler=tsc`, {
+    execSync(`npx nx g @nx/js:library packages/sample --name=sample --bundler=tsc`, {
       cwd: workspaceRoot,
       stdio: 'inherit',
       env: ciEnv,
@@ -69,5 +69,38 @@ describe('nx-sonar e2e: jest project', () => {
     expect(props['sonar.javascript.lcov.reportPaths']).toContain(
       'packages/sample/lcov.info',
     );
+  });
+
+  it('honors nx.json options in CI even when the executor schema declares defaults', () => {
+    // Nx fills executor options with schema defaults before invoking the
+    // executor, so a `default` in schema.json must never exist for options
+    // that can also be set in nx.json -> nxSonar: it would always win over
+    // the nx.json layer.
+    const nxJsonPath = join(workspaceRoot, 'nx.json');
+    const nxJson = JSON.parse(readFileSync(nxJsonPath, 'utf-8'));
+    nxJson.nxSonar = {
+      ...(nxJson.nxSonar ?? {}),
+      branchDetection: false,
+      qualityGateWait: false,
+    };
+    writeFileSync(nxJsonPath, JSON.stringify(nxJson, null, 2));
+
+    const out = join(workspaceRoot, 'dry-run-nx-json-layer.json');
+    execSync(`npx nx run sample:sonar --skipNxCache`, {
+      cwd: workspaceRoot,
+      stdio: 'inherit',
+      env: {
+        ...ciEnv,
+        SONAR_TOKEN: 'e2e-token',
+        GITLAB_CI: 'true',
+        CI_COMMIT_BRANCH: 'develop',
+        NX_SONAR_DRY_RUN: '1',
+        NX_SONAR_DRY_RUN_OUT: out,
+      },
+    });
+
+    const props = JSON.parse(readFileSync(out, 'utf-8'));
+    expect(props['sonar.branch.name']).toBeUndefined();
+    expect(props['sonar.qualitygate.wait']).toBe('false');
   });
 });

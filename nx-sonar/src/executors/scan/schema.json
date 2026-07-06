@@ -28,8 +28,14 @@
     },
     "coverageLcovPath": { "type": "string" },
     "testExecutionReportPath": { "type": "string" },
-    "qualityGateWait": { "type": "boolean", "default": true },
-    "branchDetection": { "type": "boolean", "default": true },
+    "qualityGateWait": {
+      "type": "boolean",
+      "description": "Wait for the Quality Gate result. Defaults to true (resolved in the executor, NOT via a schema `default`: Nx injects schema defaults into the options before the executor runs, which would silently override the nx.json -> nxSonar layer)."
+    },
+    "branchDetection": {
+      "type": "boolean",
+      "description": "Send branch/PR properties detected from the CI environment. Defaults to true (resolved in the executor, NOT via a schema `default` — see qualityGateWait)."
+    },
     "extraProperties": {
       "type": "object",
       "additionalProperties": { "type": "string" }
