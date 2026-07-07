@@ -17,16 +17,16 @@
   },
   "private": true,
   "dependencies": {
-    "@nx/devkit": "22.7.1"
+    "@nx/devkit": "23.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
-    "@nx/eslint": "22.7.1",
-    "@nx/eslint-plugin": "22.7.1",
-    "@nx/jest": "22.7.1",
-    "@nx/js": "22.7.1",
-    "@nx/plugin": "22.7.1",
-    "@nx/workspace": "22.7.1",
+    "@nx/eslint": "23.0.1",
+    "@nx/eslint-plugin": "23.0.1",
+    "@nx/jest": "23.0.1",
+    "@nx/js": "23.0.1",
+    "@nx/plugin": "23.0.1",
+    "@nx/workspace": "23.0.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
@@ -47,7 +47,7 @@
     "jest-environment-node": "^30.0.2",
     "jest-util": "^30.0.2",
     "jsonc-eslint-parser": "^2.1.0",
-    "nx": "22.7.1",
+    "nx": "23.0.1",
     "prettier": "~3.6.2",
     "semantic-release": "^25.0.3",
     "sonarqube-scanner": "^4.3.6",

@@ -12,7 +12,7 @@ describe('nx-sonar e2e: jest project', () => {
   beforeAll(() => {
     rmSync(workspaceRoot, { recursive: true, force: true });
     execSync(
-      `npx --yes create-nx-workspace@22 ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
+      `npx --yes create-nx-workspace@23 ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
       { cwd: tmpdir(), stdio: 'inherit', env: ciEnv },
     );
     // Install the locally built plugin tarball (the scaffold's globalSetup
