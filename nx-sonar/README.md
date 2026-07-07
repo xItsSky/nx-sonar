@@ -25,8 +25,8 @@ npm install --save-dev @itssky/nx-sonar
 ## Versioning
 
 The plugin's **major** version tracks the **Nx major** it supports:
-`@itssky/nx-sonar` 22.x targets Nx 22 (`@nx/devkit ^22`). When Nx 23 is
-supported, the plugin releases 23.0.0. Minor and patch versions follow
+`@itssky/nx-sonar` 23.x targets Nx 23 (`@nx/devkit ^23`). When Nx 24 is
+supported, the plugin releases 24.0.0. Minor and patch versions follow
 semantic-release within that major.
 
 ## Quickstart

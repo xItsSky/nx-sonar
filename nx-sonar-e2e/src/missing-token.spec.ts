@@ -12,7 +12,7 @@ describe('nx-sonar e2e: missing SONAR_TOKEN', () => {
   beforeAll(() => {
     rmSync(workspaceRoot, { recursive: true, force: true });
     execSync(
-      `npx --yes create-nx-workspace@22 ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
+      `npx --yes create-nx-workspace@23 ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
       { cwd: tmpdir(), stdio: 'inherit', env: ciEnv },
     );
     execSync(`npm install --save-dev @itssky/nx-sonar@e2e`, {
