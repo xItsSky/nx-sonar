@@ -1,3 +1,13 @@
+## [23.0.0](https://github.com/xItsSky/nx-sonar/compare/v22.0.2...v23.0.0) (2026-07-07)
+
+### ⚠ BREAKING CHANGES
+
+* **nx-sonar:** @itssky/nx-sonar 23.x requires Nx 23 (@nx/devkit ^23).
+
+### Features
+
+* **nx-sonar:** support nx 23 ([#12](https://github.com/xItsSky/nx-sonar/issues/12)) ([f97f0dc](https://github.com/xItsSky/nx-sonar/commit/f97f0dc346004e96b9eda981db09a9dbbdfa1c16)), closes [#11](https://github.com/xItsSky/nx-sonar/issues/11)
+
 ## [22.0.2](https://github.com/xItsSky/nx-sonar/compare/v22.0.1...v22.0.2) (2026-07-06)
 
 ### Bug Fixes
