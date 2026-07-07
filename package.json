@@ -2,6 +2,10 @@
   "name": "@nx-sonar/source",
   "version": "0.0.0",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xItsSky/nx-sonar"
+  },
   "scripts": {
     "test": "nx run-many -t test",
     "lint": "nx run-many -t lint",
