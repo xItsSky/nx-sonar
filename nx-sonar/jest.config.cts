@@ -7,4 +7,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../coverage/nx-sonar',
+  coverageReporters: ['text', 'lcov', 'html'],
 };
