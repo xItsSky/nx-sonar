@@ -59,5 +59,13 @@ describe('runScanner', () => {
 
       fs.unlinkSync(out);
     });
+
+    it('throws when NX_SONAR_DRY_RUN_OUT is not set', async () => {
+      process.env.NX_SONAR_DRY_RUN = '1';
+      await expect(
+        runScanner({ 'sonar.projectKey': 'k', 'sonar.host.url': 'https://x' }),
+      ).rejects.toThrow('NX_SONAR_DRY_RUN_OUT');
+      expect(scannerMock).not.toHaveBeenCalled();
+    });
   });
 });

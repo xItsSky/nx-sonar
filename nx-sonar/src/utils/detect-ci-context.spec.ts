@@ -32,6 +32,26 @@ describe('detectCiContext', () => {
         }),
       ).toEqual({ kind: 'branch', name: 'develop' });
     });
+
+    it('returns null on a PR event when the ref is not a pull ref', () => {
+      expect(
+        detectCiContext({
+          GITHUB_ACTIONS: 'true',
+          GITHUB_EVENT_NAME: 'pull_request',
+          GITHUB_REF: 'refs/heads/feature/x',
+        }),
+      ).toBeNull();
+    });
+
+    it('returns null when GitHub Actions runs on neither a PR nor a branch ref', () => {
+      expect(
+        detectCiContext({
+          GITHUB_ACTIONS: 'true',
+          GITHUB_EVENT_NAME: 'schedule',
+          GITHUB_REF: 'refs/tags/v1.0.0',
+        }),
+      ).toBeNull();
+    });
   });
 
   describe('GitLab CI', () => {
@@ -59,6 +79,10 @@ describe('detectCiContext', () => {
         }),
       ).toEqual({ kind: 'branch', name: 'develop' });
     });
+
+    it('returns null when GitLab CI exposes neither a merge request nor a branch', () => {
+      expect(detectCiContext({ GITLAB_CI: 'true' })).toBeNull();
+    });
   });
 
   describe('CircleCI', () => {
@@ -84,6 +108,19 @@ describe('detectCiContext', () => {
           CIRCLE_BRANCH: 'develop',
         }),
       ).toEqual({ kind: 'branch', name: 'develop' });
+    });
+
+    it('falls back to null when CIRCLE_PULL_REQUEST has no trailing PR number', () => {
+      expect(
+        detectCiContext({
+          CIRCLECI: 'true',
+          CIRCLE_PULL_REQUEST: 'https://github.com/o/r/pull/',
+        }),
+      ).toBeNull();
+    });
+
+    it('returns null when CircleCI exposes neither a PR nor a branch', () => {
+      expect(detectCiContext({ CIRCLECI: 'true' })).toBeNull();
     });
   });
 
@@ -111,6 +148,10 @@ describe('detectCiContext', () => {
           BITBUCKET_BRANCH: 'develop',
         }),
       ).toEqual({ kind: 'branch', name: 'develop' });
+    });
+
+    it('returns null when Bitbucket exposes neither a PR nor a branch', () => {
+      expect(detectCiContext({ BITBUCKET_BUILD_NUMBER: '1' })).toBeNull();
     });
   });
 });

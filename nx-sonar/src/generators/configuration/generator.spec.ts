@@ -93,4 +93,29 @@ describe('configuration generator', () => {
     expect(warn).toHaveBeenCalledWith(expect.stringContaining('coverage'));
     warn.mockRestore();
   });
+
+  it('does not warn when the test target already enables coverage', async () => {
+    const project = readProjectConfiguration(tree, 'my-app');
+    project.targets = {
+      ...project.targets,
+      test: {
+        executor: '@nx/jest:jest',
+        options: { jestConfig: 'apps/my-app/jest.config.ts', coverage: true },
+      },
+    };
+    updateProjectConfiguration(tree, 'my-app', project);
+    const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+    await configurationGenerator(tree, {
+      project: 'my-app',
+      projectKey: 'org_my-app',
+    });
+    expect(warn).not.toHaveBeenCalled();
+    warn.mockRestore();
+  });
+
+  it('omits projectKey from the target options when none is provided', async () => {
+    await configurationGenerator(tree, { project: 'my-app' });
+    const project = readProjectConfiguration(tree, 'my-app');
+    expect(project.targets?.sonar.options).toEqual({ projectName: 'my-app' });
+  });
 });
