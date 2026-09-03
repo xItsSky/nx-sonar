@@ -1,3 +1,9 @@
+## [23.0.1](https://github.com/xItsSky/nx-sonar/compare/v23.0.0...v23.0.1) (2026-09-03)
+
+### Bug Fixes
+
+* **coverage:** emit lcov report for codecov ([#18](https://github.com/xItsSky/nx-sonar/issues/18)) ([bb246e7](https://github.com/xItsSky/nx-sonar/commit/bb246e70cdb3b3331c46fc610555edd39149999d))
+
 ## [23.0.0](https://github.com/xItsSky/nx-sonar/compare/v22.0.2...v23.0.0) (2026-07-07)
 
 ### ⚠ BREAKING CHANGES
