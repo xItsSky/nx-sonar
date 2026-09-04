@@ -78,4 +78,25 @@ describe('scan executor', () => {
     const result = await executor({ projectKey: 'k' }, context());
     expect(result).toEqual({ success: false });
   });
+
+  it('returns success:false and logs when the project config cannot be resolved', async () => {
+    const err = jest.spyOn(console, 'error').mockImplementation(jest.fn());
+    const result = await executor(
+      { projectKey: 'k' },
+      context({ projectName: 'unknown-app' }),
+    );
+    expect(result).toEqual({ success: false });
+    expect(err).toHaveBeenCalledWith(
+      expect.stringContaining('Cannot resolve project config'),
+    );
+    expect(runScannerMock).not.toHaveBeenCalled();
+    err.mockRestore();
+  });
+
+  it('rethrows unexpected (non-NxSonar) errors', async () => {
+    runScannerMock.mockRejectedValueOnce(new Error('network down'));
+    await expect(executor({ projectKey: 'k' }, context())).rejects.toThrow(
+      'network down',
+    );
+  });
 });
