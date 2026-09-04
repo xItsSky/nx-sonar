@@ -1,8 +1,25 @@
 {
   "name": "@itssky/nx-sonar",
   "version": "0.0.0-development",
-  "description": "Turnkey nx plugin that runs SonarQube/SonarCloud scans on nx projects.",
-  "keywords": ["nx", "nx-plugin", "sonar", "sonarqube", "sonarcloud", "code-quality"],
+  "description": "Turnkey Nx plugin that runs SonarQube and SonarCloud scans on any project in your monorepo — with coverage, CI branch/PR detection, and zero extra installs.",
+  "keywords": [
+    "nx",
+    "nx-plugin",
+    "nx-devkit",
+    "nrwl",
+    "monorepo",
+    "sonar",
+    "sonarqube",
+    "sonarcloud",
+    "sonar-scanner",
+    "sonarqube-scanner",
+    "code-quality",
+    "code-coverage",
+    "static-analysis",
+    "lcov",
+    "quality-gate",
+    "typescript"
+  ],
   "homepage": "https://github.com/xItsSky/nx-sonar#readme",
   "bugs": "https://github.com/xItsSky/nx-sonar/issues",
   "repository": {
