@@ -1,0 +1,44 @@
+version: 2
+
+updates:
+  # Keep the npm tree current so transitive advisories get picked up by routine
+  # bumps instead of waiting on a security alert that Dependabot cannot resolve.
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    versioning-strategy: increase
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
+    groups:
+      nx:
+        patterns:
+          - 'nx'
+          - '@nx/*'
+      semantic-release:
+        patterns:
+          - 'semantic-release'
+          - '@semantic-release/*'
+      dev-dependencies:
+        dependency-type: development
+        exclude-patterns:
+          - 'nx'
+          - '@nx/*'
+          - 'semantic-release'
+          - '@semantic-release/*'
+    ignore:
+      # Pinned on purpose: the e2e registry breaks on any other version.
+      - dependency-name: verdaccio
+
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: ci
+      include: scope
