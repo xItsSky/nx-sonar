@@ -1,3 +1,9 @@
+## [23.0.2](https://github.com/xItsSky/nx-sonar/compare/v23.0.1...v23.0.2) (2026-09-28)
+
+### Bug Fixes
+
+* **deps:** pin patched adm-zip and smol-toml via overrides ([#21](https://github.com/xItsSky/nx-sonar/issues/21)) ([9451612](https://github.com/xItsSky/nx-sonar/commit/9451612c63942be7115d59a2e5c9a1530f4cc237))
+
 ## [23.0.1](https://github.com/xItsSky/nx-sonar/compare/v23.0.0...v23.0.1) (2026-09-03)
 
 ### Bug Fixes
