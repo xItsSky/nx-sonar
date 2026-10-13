@@ -47,7 +47,7 @@
     "jest-environment-node": "^30.0.2",
     "jest-util": "^30.0.2",
     "jsonc-eslint-parser": "^2.1.0",
-    "nx": "23.1.0",
+    "nx": "23.2.1",
     "prettier": "~3.6.2",
     "semantic-release": "^25.0.3",
     "sonarqube-scanner": "^4.3.6",
