@@ -1,3 +1,17 @@
+## [24.0.0](https://github.com/xItsSky/nx-sonar/compare/v23.0.2...v24.0.0) (2026-11-16)
+
+### ⚠ BREAKING CHANGES
+
+* **nx-sonar:** the plugin now requires @nx/devkit ^24.0.0 and Node
+22.12.0 or later. Node 22.12 is the floor because sonarqube-scanner 5 is
+ESM-only while this package ships CommonJS, so loading it needs a Node
+with require(esm) support. Workspaces on Nx 23 or Node 20 should stay on
+the plugin's 23.x line.
+
+### Features
+
+* **nx-sonar:** support nx 24 and clear dependency advisories ([#39](https://github.com/xItsSky/nx-sonar/issues/39)) ([fbd7d91](https://github.com/xItsSky/nx-sonar/commit/fbd7d91e5975ed5fe5089f52d744528af4b89ae0))
+
 ## [23.0.2](https://github.com/xItsSky/nx-sonar/compare/v23.0.1...v23.0.2) (2026-09-28)
 
 ### Bug Fixes
