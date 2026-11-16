@@ -25,9 +25,12 @@ npm install --save-dev @itssky/nx-sonar
 ## Versioning
 
 The plugin's **major** version tracks the **Nx major** it supports:
-`@itssky/nx-sonar` 23.x targets Nx 23 (`@nx/devkit ^23`). When Nx 24 is
-supported, the plugin releases 24.0.0. Minor and patch versions follow
+`@itssky/nx-sonar` 24.x targets Nx 24 (`@nx/devkit ^24`). Workspaces still on
+Nx 23 should stay on the 23.x line. Minor and patch versions follow
 semantic-release within that major.
+
+Requires **Node 22.12 or later**: `sonarqube-scanner` 5 is ESM-only and this
+package ships CommonJS, so loading it needs a Node that can `require(esm)`.
 
 ## Quickstart
 

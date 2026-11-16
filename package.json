@@ -17,16 +17,16 @@
   },
   "private": true,
   "dependencies": {
-    "@nx/devkit": "23.0.1"
+    "@nx/devkit": "24.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
-    "@nx/eslint": "23.1.0",
-    "@nx/eslint-plugin": "23.1.0",
-    "@nx/jest": "23.1.0",
-    "@nx/js": "23.1.0",
-    "@nx/plugin": "23.1.0",
-    "@nx/workspace": "23.1.0",
+    "@nx/eslint": "24.0.6",
+    "@nx/eslint-plugin": "24.0.6",
+    "@nx/jest": "24.0.6",
+    "@nx/js": "24.0.6",
+    "@nx/plugin": "24.0.6",
+    "@nx/workspace": "24.0.6",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
@@ -38,7 +38,7 @@
     "@swc/core": "~1.15.5",
     "@swc/helpers": "~0.5.18",
     "@types/jest": "^30.0.0",
-    "@types/node": "20.19.9",
+    "@types/node": "22.19.3",
     "conventional-changelog-conventionalcommits": "^9.3.1",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
@@ -47,35 +47,27 @@
     "jest-environment-node": "^30.0.2",
     "jest-util": "^30.0.2",
     "jsonc-eslint-parser": "^2.1.0",
-    "nx": "23.1.0",
+    "nx": "24.0.6",
     "prettier": "~3.6.2",
     "semantic-release": "^25.0.3",
-    "sonarqube-scanner": "^4.3.6",
+    "sonarqube-scanner": "^5.1.0",
     "ts-jest": "^29.4.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0",
-    "verdaccio": "6.8.0"
-  },
-  "overrides": {
-    "adm-zip": "^0.6.1",
-    "axios": "^1.18.1",
-    "brace-expansion": "5.0.9",
-    "fast-uri": "^3.1.7",
-    "minimatch": "^10.2.5",
-    "js-yaml@3": "3.15.2",
-    "js-yaml@4": "4.3.2",
-    "qs": "^6.16.0",
-    "smol-toml": "1.7.2",
-    "tar": "^7.5.22",
-    "test-exclude": "^8.0.0",
-    "uuid": "^11.1.1"
+    "verdaccio": "6.11.2"
   },
   "nx": {
     "includedScripts": []
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.12.0"
+  },
+  "overrides": {
+    "qs": "^6.17.1",
+    "@actions/http-client": {
+      "undici": "^6.29.1"
+    }
   }
 }

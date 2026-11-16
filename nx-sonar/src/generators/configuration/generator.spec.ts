@@ -11,7 +11,9 @@ describe('configuration generator', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    // No formatter: these specs assert on what the generator wrote and on the
+    // warnings it emitted, and Nx's default (oxfmt) is not installed here.
+    tree = createTreeWithEmptyWorkspace({ formatter: 'none' });
     addProjectConfiguration(tree, 'my-app', {
       root: 'apps/my-app',
       projectType: 'application',
@@ -79,7 +81,9 @@ describe('configuration generator', () => {
       project: 'lib-no-test',
       projectKey: 'org_lib-no-test',
     });
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('no `test` target'));
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('no `test` target'),
+    );
     warn.mockRestore();
   });
 

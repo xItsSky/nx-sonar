@@ -3,7 +3,11 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 
-const ciEnv: NodeJS.ProcessEnv = { ...process.env, CI: '1', NX_DAEMON: 'false' };
+const ciEnv: NodeJS.ProcessEnv = {
+  ...process.env,
+  CI: '1',
+  NX_DAEMON: 'false',
+};
 
 describe('nx-sonar e2e: jest project', () => {
   const workspaceName = `nx-sonar-e2e-jest-${Date.now()}`;
@@ -12,7 +16,7 @@ describe('nx-sonar e2e: jest project', () => {
   beforeAll(() => {
     rmSync(workspaceRoot, { recursive: true, force: true });
     execSync(
-      `npx --yes create-nx-workspace@23 ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
+      `npx --yes create-nx-workspace@24 ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
       { cwd: tmpdir(), stdio: 'inherit', env: ciEnv },
     );
     // Install the locally built plugin tarball (the scaffold's globalSetup
@@ -33,11 +37,14 @@ describe('nx-sonar e2e: jest project', () => {
     );
 
     // Create a small lib that has a jest test target.
-    execSync(`npx nx g @nx/js:library packages/sample --name=sample --bundler=tsc --linter=none --unitTestRunner=none`, {
-      cwd: workspaceRoot,
-      stdio: 'inherit',
-      env: ciEnv,
-    });
+    execSync(
+      `npx nx g @nx/js:library packages/sample --name=sample --bundler=tsc --linter=none --unitTestRunner=none`,
+      {
+        cwd: workspaceRoot,
+        stdio: 'inherit',
+        env: ciEnv,
+      },
+    );
 
     execSync(
       `npx nx g @itssky/nx-sonar:configuration --project=sample --projectKey=org_sample`,
@@ -102,5 +109,38 @@ describe('nx-sonar e2e: jest project', () => {
     const props = JSON.parse(readFileSync(out, 'utf-8'));
     expect(props['sonar.branch.name']).toBeUndefined();
     expect(props['sonar.qualitygate.wait']).toBe('false');
+  });
+
+  it('loads the ESM-only sonarqube-scanner from the CommonJS build', () => {
+    // sonarqube-scanner 5 is pure ESM while this plugin ships CommonJS, so the
+    // published package only works on a Node that supports require(esm) —
+    // hence engines.node >=22.12.0. The dry-run above returns before the
+    // scanner is ever called, so nothing else covers this. Asserting on the
+    // installed tree catches both a Node floor regression and a future
+    // scanner release that stops exposing a callable default export.
+    // Via a file rather than `node -e`: the probe spans several lines, and the
+    // shell mangles the newlines of an inlined script.
+    const probePath = join(workspaceRoot, 'esm-interop-probe.cjs');
+    writeFileSync(
+      probePath,
+      [
+        "const scanner = require('sonarqube-scanner');",
+        "const { runScanner } = require('@itssky/nx-sonar/src/utils/run-scanner');",
+        "if (typeof (scanner.default ?? scanner) !== 'function') {",
+        "  throw new Error('sonarqube-scanner has no callable default export');",
+        '}',
+        "if (typeof runScanner !== 'function') {",
+        "  throw new Error('run-scanner did not export runScanner');",
+        '}',
+        "console.log('interop-ok');",
+      ].join('\n'),
+    );
+
+    const result = execSync(`node ${JSON.stringify(probePath)}`, {
+      cwd: workspaceRoot,
+      env: ciEnv,
+    }).toString();
+
+    expect(result).toContain('interop-ok');
   });
 });

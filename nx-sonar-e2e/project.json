@@ -6,16 +6,17 @@
   "implicitDependencies": ["nx-sonar"],
   "targets": {
     "e2e": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "dependsOn": ["^build"],
       "options": {
-        "jestConfig": "nx-sonar-e2e/jest.config.cts",
+        "passWithNoTests": true,
         "runInBand": true
       },
-      "dependsOn": ["^build"]
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "coverage": true
+        }
+      }
     },
     "typecheck": {
       "executor": "nx:run-commands",

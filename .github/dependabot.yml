@@ -30,9 +30,6 @@ updates:
           - '@nx/*'
           - 'semantic-release'
           - '@semantic-release/*'
-    ignore:
-      # Pinned on purpose: the e2e registry breaks on any other version.
-      - dependency-name: verdaccio
 
   - package-ecosystem: github-actions
     directory: '/'

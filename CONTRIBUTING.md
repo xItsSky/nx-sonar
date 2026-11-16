@@ -39,8 +39,8 @@ The plugin and its e2e project are managed by Nx. Source code is TypeScript, tes
 
 ### Prerequisites
 
-- **Node:** 20.x or 22.x. Older versions will throw `engines` warnings and break the e2e suite.
-- **npm:** 10+ (comes with Node 20+).
+- **Node:** 22.12+ or 24.x. Older versions throw `engines` warnings and break the e2e suite. The 22.12 floor comes from `sonarqube-scanner` 5, which is ESM-only and needs a Node that can `require(esm)`.
+- **npm:** 10+ (comes with Node 22+).
 - **A Sonar account** is **not** required for development — the e2e suite uses a dry-run hook that never contacts a real server.
 
 ### Install
@@ -62,7 +62,7 @@ npm run e2e         # full e2e suite (NX_SONAR_DRY_RUN — no real scanner call)
 npm run format      # Prettier write
 ```
 
-Run **lint + typecheck + test + build + e2e** locally before opening a PR. CI runs the same set on Node 20 and 22 and must be green before merge.
+Run **lint + typecheck + test + build + e2e** locally before opening a PR. CI runs the same set on Node 22 and 24 and must be green before merge.
 
 ### Working on the executor or a util
 

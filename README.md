@@ -64,16 +64,19 @@ docs/              # architecture, ADRs, design specs
 
 ## Versioning &amp; support
 
-Released automatically via [semantic-release](https://semantic-release.gitbook.io/) from conventional-commit messages. Releases follow [semver](https://semver.org), and the plugin's **major version tracks the Nx major it supports**: `@itssky/nx-sonar` 23.x targets Nx 23, and 24.0.0 will ship when Nx 24 is supported.
+Released automatically via [semantic-release](https://semantic-release.gitbook.io/) from conventional-commit messages. Releases follow [semver](https://semver.org), and the plugin's **major version tracks the Nx major it supports**: `@itssky/nx-sonar` 24.x targets Nx 24. Workspaces still on Nx 23 should stay on the plugin's 23.x line.
 
 Support matrix:
 
-| Tool   | Versions                 |
-| ------ | ------------------------ |
-| Node   | 20.x, 22.x               |
-| Nx     | 23.x (plugin 23.x)       |
-| Jest   | 28+                      |
-| Vitest | 1+                       |
+| Tool   | Versions             |
+| ------ | -------------------- |
+| Node   | 22.12+, 24.x         |
+| Nx     | 24.x (plugin 24.x)   |
+| Jest   | 28+                  |
+| Vitest | 1+                   |
+
+Node 22.12 is the floor because `sonarqube-scanner` 5 is ESM-only and this
+plugin ships CommonJS, so loading it needs a Node with `require(esm)`.
 
 ## Contributing
 

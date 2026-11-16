@@ -6,7 +6,9 @@ describe('init generator', () => {
   let tree: Tree;
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
+    // No formatter: these specs assert on what the generator wrote, and Nx's
+    // default (oxfmt) is not installed here.
+    tree = createTreeWithEmptyWorkspace({ formatter: 'none' });
   });
 
   it('registers the plugin in nx.json', async () => {
@@ -97,7 +99,9 @@ describe('init generator', () => {
     tree.write('.env.example', 'EXISTING=value');
     await initGenerator(tree, { skipPrompts: true });
     const env = tree.read('.env.example', 'utf-8') ?? '';
-    expect(env).toBe('EXISTING=value\n# @itssky/nx-sonar — required for `nx run <project>:sonar`\nSONAR_TOKEN=\nSONAR_HOST_URL=\nSONAR_ORGANIZATION=\n');
+    expect(env).toBe(
+      'EXISTING=value\n# @itssky/nx-sonar — required for `nx run <project>:sonar`\nSONAR_TOKEN=\nSONAR_HOST_URL=\nSONAR_ORGANIZATION=\n',
+    );
   });
 
   it('leaves .env.example untouched when SONAR_TOKEN is already present', async () => {
