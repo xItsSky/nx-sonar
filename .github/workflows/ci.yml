@@ -33,7 +33,7 @@ jobs:
       - run: npx nx run-many -t test --coverage
       - run: npx nx run-many -t build
       - run: npx nx run nx-sonar-e2e:e2e
-      - if: matrix.node == 20
+      - if: matrix.node == 22
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
