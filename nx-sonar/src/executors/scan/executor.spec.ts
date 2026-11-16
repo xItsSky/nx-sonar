@@ -2,7 +2,10 @@ import executor from './executor';
 import * as runner from '../../utils/run-scanner';
 import type { ExecutorContext } from '@nx/devkit';
 
-jest.mock('../../utils/run-scanner');
+// A factory rather than an automock: automocking loads the real module to read
+// its shape, which pulls in the ESM-only sonarqube-scanner that this CommonJS
+// test environment cannot require.
+jest.mock('../../utils/run-scanner', () => ({ runScanner: jest.fn() }));
 jest.mock('fs', () => ({
   ...jest.requireActual('fs'),
   existsSync: jest.fn().mockReturnValue(true),
@@ -39,10 +42,7 @@ describe('scan executor', () => {
   });
 
   it('runs the scanner with the merged property bag on the happy path', async () => {
-    const result = await executor(
-      { projectKey: 'k' },
-      context(),
-    );
+    const result = await executor({ projectKey: 'k' }, context());
     expect(result).toEqual({ success: true });
     expect(runScannerMock).toHaveBeenCalledTimes(1);
     const props = runScannerMock.mock.calls[0][0];
@@ -53,7 +53,9 @@ describe('scan executor', () => {
     await executor(
       { projectKey: 'k' },
       context({
-        nxJsonConfiguration: { nxSonar: { hostUrl: 'https://workspace' } } as any,
+        nxJsonConfiguration: {
+          nxSonar: { hostUrl: 'https://workspace' },
+        } as any,
       }),
     );
     expect(runScannerMock.mock.calls[0][0]['sonar.host.url']).toBe(
@@ -66,9 +68,7 @@ describe('scan executor', () => {
     const err = jest.spyOn(console, 'error').mockImplementation(jest.fn());
     const result = await executor({ projectKey: 'k' }, context());
     expect(result).toEqual({ success: false });
-    expect(err).toHaveBeenCalledWith(
-      expect.stringContaining('SONAR_TOKEN'),
-    );
+    expect(err).toHaveBeenCalledWith(expect.stringContaining('SONAR_TOKEN'));
     expect(runScannerMock).not.toHaveBeenCalled();
     err.mockRestore();
   });

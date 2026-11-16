@@ -3,7 +3,11 @@ import { mkdirSync, rmSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { tmpdir } from 'os';
 
-const ciEnv: NodeJS.ProcessEnv = { ...process.env, CI: '1', NX_DAEMON: 'false' };
+const ciEnv: NodeJS.ProcessEnv = {
+  ...process.env,
+  CI: '1',
+  NX_DAEMON: 'false',
+};
 
 describe('nx-sonar e2e: missing SONAR_TOKEN', () => {
   const workspaceName = `nx-sonar-e2e-missing-token-${Date.now()}`;
@@ -12,7 +16,7 @@ describe('nx-sonar e2e: missing SONAR_TOKEN', () => {
   beforeAll(() => {
     rmSync(workspaceRoot, { recursive: true, force: true });
     execSync(
-      `npx --yes create-nx-workspace@23 ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
+      `npx --yes create-nx-workspace@24 ${workspaceName} --preset apps --packageManager npm --nxCloud skip --no-interactive`,
       { cwd: tmpdir(), stdio: 'inherit', env: ciEnv },
     );
     execSync(`npm install --save-dev @itssky/nx-sonar@e2e`, {
@@ -25,11 +29,14 @@ describe('nx-sonar e2e: missing SONAR_TOKEN', () => {
       stdio: 'inherit',
       env: ciEnv,
     });
-    execSync(`npx nx g @nx/js:library packages/sample --name=sample --bundler=tsc --linter=none --unitTestRunner=none`, {
-      cwd: workspaceRoot,
-      stdio: 'inherit',
-      env: ciEnv,
-    });
+    execSync(
+      `npx nx g @nx/js:library packages/sample --name=sample --bundler=tsc --linter=none --unitTestRunner=none`,
+      {
+        cwd: workspaceRoot,
+        stdio: 'inherit',
+        env: ciEnv,
+      },
+    );
     execSync(
       `npx nx g @itssky/nx-sonar:configuration --project=sample --projectKey=org_sample`,
       { cwd: workspaceRoot, stdio: 'inherit', env: ciEnv },
@@ -47,10 +54,16 @@ describe('nx-sonar e2e: missing SONAR_TOKEN', () => {
 
     let output = '';
     try {
-      output = execSync(`npx nx run sample:sonar --skipNxCache`, {
-        cwd: workspaceRoot,
-        env,
-      }).toString();
+      // --output-style=static: from Nx 24 the default style keeps a failed
+      // task's log in a file and prints only a summary, so the executor's
+      // error would never reach stdout.
+      output = execSync(
+        `npx nx run sample:sonar --skipNxCache --output-style=static`,
+        {
+          cwd: workspaceRoot,
+          env,
+        },
+      ).toString();
     } catch (e: any) {
       output = (e.stdout?.toString() ?? '') + (e.stderr?.toString() ?? '');
     }
